@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <title>Classify your Image!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      table {
+        border: 5px solid burlywood;
+        width: 100%;
+        table-layout:fixed;
+      }
+      
+      th, td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even){background-color: #f2f2f2}
+      
+      th {
+        background-color: #04AA6D;
+        color: white;
+      }
+      </style>
+  </head>
+<body style="background-color:powderblue;">
+  <h1 class="text-center"> Upload your image to be classified! </h1>
+  <form class = "p-3 text-center" action ='/' method="post" enctype="multipart/form-data">
+
+    <input class ="form-control" type='file' name='imagefile'>
+    <p class = "text-center" style="margin-top:20px;"> OR </p>
+    <input type="text" name="imagefile1" class ="form-control"> <br>
+    <p class = "text-center" style="margin-top:20px;"> OR </p><br>
+    <a href="/cam" class = "text-center">Open webcam</a><br>
+    <input type="text" name="imagefile2" value="{{found}}" readonly><br>
+    <input class= "btn btn-primary mt-3" type='submit' name= 'submit'/>
+    
+  </form>
+  {% if prediction %}
+    <img src="{{image_path}}" alt="{{image_path}}" height="224px" width="224px" style="margin:10px auto 20px; display: block;">
+    <p class = "text-center" style="margin-top:20px; font-size: 35px"> <strong> Your Predictions:</strong> </p>
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Name of Flower</th>
+        <th>Probability</th>
+      </tr>
+      <tr>
+        <td>1st:</td>
+        <td><strong>{{ prediction.class1 }}</strong></td>
+        <td><strong>{{ prediction.prob1 }}</strong></td>
+      </tr>
+      <tr>
+        <td>2nd:</td>
+        <td><strong>{{ prediction.class2 }}</strong></td>
+        <td><strong>{{ prediction.prob2 }}</strong></td>
+      </tr>
+      <tr>
+        <td>3rd:</td>
+        <td><strong>{{ prediction.class3 }}</strong></td>
+        <td><strong>{{ prediction.prob3 }}</strong></td>
+      </tr>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5">Take Picture</h3>
+                <form method="post" action="{{ url_for('change_mode') }}">
+                <input type="submit" name="submit_button" value="Camera 1">
+                <input type="submit" name="submit_button" value="Camera 2"><br>
+                </form>
+                <img src="{{ url_for('video_feed') }}" width="80%" height="80%"><br>
+                <form method="post" action="{{ url_for('tasks') }}">
+                    <input type="submit" value="Capture" name="click" class = "center"/>
+                </form>
+                {% if check %}
+                <form method="post" action="{{ url_for('send_image') }}">
+                    <input type="submit" value="send image" name="click" class = "center"/>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
