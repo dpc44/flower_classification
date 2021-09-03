@@ -37,12 +37,15 @@ global capture, camera
 camera = cv2.VideoCapture(1)      
 app = Flask(__name__, static_folder="uploads\\")
 
-
-
 capture=0
 
 try:
     os.mkdir('./shots')
+except OSError as error:
+    pass
+
+try:
+    os.mkdir('./uploads')
 except OSError as error:
     pass
 
@@ -86,7 +89,7 @@ def index():
         x = tf.expand_dims(x, 0)
         x = preprocess_input(x)
         preds = model.predict(x)
-        
+        preds = preds.astype('float64')
         position = np.argsort(preds[0])
         #print("------preds[0]--------")
         #print(type(preds[0]))
